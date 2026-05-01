@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Games Growth Guild | A Global Network of Marketing Professionals</title>
+<meta name="description" content="A global network of marketing pros driving the games industry forward, from indie to AAA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0B0E;
+    --bg2: #0F1116;
+    --surface: #14171E;
+    --surface2: #1A1E27;
+    --border: #232830;
+    --border2: #2D333E;
+    --text: #F5F5F7;
+    --muted: #9097A1;
+    --dim: #5A626E;
+    --purple: #A855F7;
+    --purple2: #7C3AED;
+    --purple3: #C084FC;
+    --purple4: #4C1D95;
+    --red: #F50741;
+    --yellow: #F5E000;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--purple); color: #fff; }
+
+  .display { font-family: 'Cal Sans', 'Inter', sans-serif; font-weight: 400; letter-spacing: -0.01em; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* Backdrop */
+  .grid-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(168,85,247,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,85,247,0.035) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 80%);
+  }
+  .glow1 { position: absolute; top: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(168,85,247,0.18), transparent 60%); filter: blur(60px); pointer-events: none; z-index: 0; }
+  .glow2 { position: absolute; top: 60vh; right: -300px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(124,58,237,0.12), transparent 60%); filter: blur(80px); pointer-events: none; z-index: 0; }
+
+  main, header, footer, section { position: relative; z-index: 1; }
+
+  /* NAV */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(18px);
+    background: rgba(10,11,14,0.78);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav {
+    max-width: 1440px; margin: 0 auto; padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-left { display: flex; align-items: center; gap: 12px; }
+  .nav-mark { width: 32px; height: 32px; }
+  .nav-name { font-weight: 800; letter-spacing: -0.01em; font-size: 16px; }
+  .nav-name span { color: var(--purple3); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: var(--text); }
+  @media (max-width: 800px) { .nav-links { display: none; } }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px;
+    transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+    cursor: pointer; border: 0; font-family: inherit; white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--purple); color: #fff;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 8px 24px rgba(168,85,247,0.35);
+  }
+  .btn-primary:hover { background: var(--purple2); transform: translateY(-1px); box-shadow: 0 12px 32px rgba(168,85,247,0.5); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border2); }
+  .btn-ghost:hover { border-color: var(--purple); color: var(--purple3); }
+  .btn-lg { padding: 16px 28px; font-size: 15px; }
+  .btn-arrow { font-family: 'JetBrains Mono', monospace; }
+
+  /* HERO */
+  .hero { padding: 80px 32px 100px; max-width: 1440px; margin: 0 auto; }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
+  @media (max-width: 1000px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  h1.hero-title {
+    font-size: clamp(56px, 9vw, 128px);
+    font-weight: 900; line-height: 0.92; letter-spacing: -0.045em;
+    margin-bottom: 28px;
+  }
+  h1.hero-title em { font-family: 'Cal Sans', 'Inter', sans-serif; font-style: normal; font-weight: 400; color: var(--purple3); letter-spacing: -0.02em; }
+
+  .hero-sub {
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: var(--muted); max-width: 580px;
+    line-height: 1.5; margin-bottom: 36px;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .hero-right {
+    position: relative; aspect-ratio: 1; max-width: 540px; margin-left: auto;
+    background: linear-gradient(135deg, rgba(168,85,247,0.18), rgba(76,29,149,0.05));
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(168,85,247,0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,85,247,0.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle, #000, transparent 70%);
+  }
+  .hero-right .big-mark { width: 60%; height: 60%; position: relative; z-index: 2; }
+
+  /* MARQUEE */
+  .marquee-section { padding: 56px 0 48px; background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .marquee-row {
+    display: flex; align-items: center; gap: 32px;
+    margin: 0 32px 32px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--dim); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .marquee-row .line { flex: 1; height: 1px; background: var(--border); }
+  .marquee {
+    display: flex; overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track { display: flex; gap: 56px; padding-right: 56px; flex-shrink: 0; animation: scroll 80s linear infinite; align-items: center; }
+  .marquee-track.reverse { animation-direction: reverse; animation-duration: 100s; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+  .studio-logo {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 56px; min-width: 100px; flex-shrink: 0;
+    opacity: 0.85; transition: opacity .25s ease;
+    padding: 0 12px;
+  }
+  .studio-logo:hover { opacity: 1; }
+  .studio-logo img { height: 100%; width: auto; max-width: 220px; object-fit: contain; }
+  .studio-text {
+    font-weight: 700; font-size: 28px;
+    color: var(--text); opacity: 0.55; letter-spacing: -0.025em;
+    white-space: nowrap; transition: opacity .2s ease, color .2s ease;
+    flex-shrink: 0;
+  }
+  .studio-text:hover { opacity: 1; color: var(--purple3); }
+
+  /* MISSION */
+  .mission { padding: 140px 32px; max-width: 1280px; margin: 0 auto; }
+  .mission-head { display: grid; grid-template-columns: 100px 1fr; gap: 32px; margin-bottom: 64px; align-items: end; }
+  @media (max-width: 800px) { .mission-head { grid-template-columns: 1fr; } }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--purple3); letter-spacing: 2px;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    align-self: start;
+  }
+  @media (max-width: 800px) { .section-num { writing-mode: horizontal-tb; transform: none; } }
+
+  .mission h2, .who h2, .disc h2, .board h2, .affiliates h2, .events-section h2, .blog-section h2 {
+    font-size: clamp(40px, 6vw, 80px); font-weight: 900;
+    line-height: 0.98; letter-spacing: -0.04em;
+  }
+  h2 em { font-family: 'Cal Sans', 'Inter', sans-serif; font-style: normal; font-weight: 400; color: var(--purple3); }
+
+  .mission-body { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; margin-bottom: 80px; }
+  @media (max-width: 900px) { .mission-body { grid-template-columns: 1fr; gap: 24px; } }
+  .mission-body p { font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55; color: var(--muted); }
+  .mission-body p:first-of-type { color: var(--text); font-weight: 500; }
+
+  .values { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .values { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .values { grid-template-columns: 1fr; } }
+  .value {
+    padding: 32px 28px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; transition: all .2s ease; position: relative;
+  }
+  .value:hover { border-color: var(--purple); background: var(--surface2); }
+  .value-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--purple3); letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .value h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .value p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+  /* WHO WE ARE */
+  .who { padding: 0 32px 140px; max-width: 1440px; margin: 0 auto; background: var(--bg); }
+  .who-inner { padding: 60px 0; border-top: 1px solid var(--border); }
+  .who-head { display: grid; grid-template-columns: 100px 1fr; gap: 32px; margin-bottom: 56px; }
+  @media (max-width: 800px) { .who-head { grid-template-columns: 1fr; } }
+  .who-body { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; }
+  @media (max-width: 900px) { .who-body { grid-template-columns: 1fr; } }
+  .who-body p { font-size: 19px; line-height: 1.6; color: var(--muted); }
+  .who-body p strong { color: var(--text); font-weight: 500; }
+  .who-body a {
+    color: var(--purple3); border-bottom: 1px solid rgba(192,132,252,0.3);
+    transition: all .2s ease; font-weight: 500;
+  }
+  .who-body a:hover { color: var(--text); border-bottom-color: var(--purple); }
+
+  /* DISCIPLINES */
+  .disc { padding: 140px 32px; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .disc-inner { max-width: 1440px; margin: 0 auto; }
+  .disc-head { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; margin-bottom: 64px; align-items: end; }
+  @media (max-width: 900px) { .disc-head { grid-template-columns: 1fr; } }
+  .disc-head p { color: var(--muted); font-size: 17px; line-height: 1.55; max-width: 480px; }
+
+  .disc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  @media (max-width: 1100px) { .disc-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .disc-grid { grid-template-columns: repeat(2, 1fr); } }
+  .disc-card {
+    padding: 28px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; transition: all .25s ease; position: relative;
+    min-height: 130px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .disc-card:hover { border-color: var(--purple); background: var(--surface2); transform: translateY(-2px); }
+  .disc-card .num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--dim); letter-spacing: 1.5px;
+  }
+  .disc-card h4 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+
+  /* ADVISORS */
+  .board { padding: 140px 32px; max-width: 1440px; margin: 0 auto; }
+  .board-head { display: grid; grid-template-columns: 100px 1fr; gap: 32px; margin-bottom: 64px; align-items: end; }
+  @media (max-width: 800px) { .board-head { grid-template-columns: 1fr; } }
+  .board-head p { color: var(--muted); font-size: 17px; line-height: 1.6; }
+
+  .advisors-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 48px 24px;
+  }
+  @media (max-width: 1100px) { .advisors-grid { grid-template-columns: repeat(4, 1fr); gap: 40px 20px; } }
+  @media (max-width: 800px) { .advisors-grid { grid-template-columns: repeat(3, 1fr); gap: 36px 20px; } }
+  @media (max-width: 540px) { .advisors-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; } }
+
+  .advisor-card {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    text-decoration: none; color: inherit;
+    transition: transform .25s ease;
+  }
+  .advisor-card:hover { transform: translateY(-4px); }
+
+  .advisor-photo {
+    width: 130px; height: 130px;
+    border-radius: 50%; overflow: hidden;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--surface2) 0%, rgba(168,85,247,0.15) 100%);
+    border: 2px solid var(--border);
+    position: relative;
+    transition: border-color .25s ease, box-shadow .25s ease;
+  }
+  .advisor-card:hover .advisor-photo {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 4px rgba(168,85,247,0.15), 0 12px 32px rgba(168,85,247,0.25);
+  }
+  .advisor-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(0.25) contrast(1.05);
+    transition: filter .3s ease, transform .4s ease;
+  }
+  .advisor-card:hover .advisor-photo img { filter: grayscale(0); transform: scale(1.04); }
+
+  .advisor-info { padding: 0 4px; }
+  .advisor-info .name { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+  .advisor-info .co {
+    font-size: 11px; color: var(--purple3); font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace; margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .advisor-info .role { font-size: 13px; color: var(--muted); line-height: 1.45; margin-bottom: 8px; }
+  .advisor-info .prev { font-size: 11px; color: var(--dim); font-style: italic; line-height: 1.4; }
+
+  /* AFFILIATES */
+  .affiliates { padding: 140px 32px; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .affiliates-inner { max-width: 1440px; margin: 0 auto; }
+  .affiliates-head { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; margin-bottom: 64px; align-items: end; }
+  @media (max-width: 900px) { .affiliates-head { grid-template-columns: 1fr; } }
+  .affiliates-head p { color: var(--muted); font-size: 17px; line-height: 1.6; max-width: 480px; }
+
+  .affiliates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 800px) { .affiliates-grid { grid-template-columns: 1fr; } }
+  .affiliate {
+    padding: 36px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; transition: all .25s ease; display: flex; gap: 24px;
+    text-decoration: none; color: inherit;
+  }
+  .affiliate:hover { border-color: var(--purple); background: var(--surface2); transform: translateY(-2px); }
+  .affiliate-logo {
+    flex-shrink: 0; width: 64px; height: 64px; border-radius: 12px;
+    background: var(--bg); padding: 12px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+  }
+  .affiliate-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .affiliate-content h4 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .affiliate-content p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+  .affiliate-content .visit {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 12px; color: var(--purple3);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+
+  /* EVENTS */
+  .events-section { padding: 140px 32px; max-width: 1440px; margin: 0 auto; }
+  .events-head { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; margin-bottom: 64px; align-items: end; }
+  @media (max-width: 900px) { .events-head { grid-template-columns: 1fr; } }
+  .events-head p { color: var(--muted); font-size: 17px; line-height: 1.6; max-width: 480px; }
+
+  .events-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 800px) { .events-grid { grid-template-columns: 1fr; } }
+  .event-card {
+    padding: 36px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; transition: all .25s ease;
+    display: flex; flex-direction: column; gap: 16px;
+    text-decoration: none; color: inherit; position: relative; overflow: hidden;
+  }
+  .event-card:hover { border-color: var(--purple); transform: translateY(-2px); }
+  .event-card.coming-soon { opacity: 0.5; }
+  .event-card.coming-soon:hover { transform: none; border-color: var(--border); }
+
+  .event-card .event-logo {
+    width: 56px; height: 56px; border-radius: 8px;
+    background: #fff; padding: 10px; display: flex; align-items: center; justify-content: center;
+  }
+  .event-card .event-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .event-card .event-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--purple3); font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .event-card h3 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .event-card .event-sub { font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .event-card .event-tag {
+    display: inline-block; padding: 6px 12px;
+    background: rgba(168,85,247,0.12); color: var(--purple3);
+    border: 1px solid rgba(168,85,247,0.25);
+    border-radius: 4px; font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+    align-self: flex-start;
+  }
+
+  /* BLOG */
+  .blog-section { padding: 140px 32px; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .blog-inner { max-width: 1440px; margin: 0 auto; }
+  .blog-head { display: grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; margin-bottom: 64px; align-items: end; }
+  @media (max-width: 900px) { .blog-head { grid-template-columns: 1fr; } }
+  .blog-head p { color: var(--muted); font-size: 17px; line-height: 1.6; max-width: 480px; }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .blog-grid { grid-template-columns: 1fr; } }
+  .blog-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; transition: all .25s ease;
+    display: flex; flex-direction: column;
+    text-decoration: none; color: inherit;
+  }
+  .blog-card:hover { border-color: var(--purple); transform: translateY(-2px); }
+  .blog-cover { aspect-ratio: 16/9; overflow: hidden; background: var(--bg); }
+  .blog-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+  .blog-card:hover .blog-cover img { transform: scale(1.04); }
+  .blog-body { padding: 24px 28px 28px; }
+  .blog-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--purple3); font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .blog-card h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 12px; }
+  .blog-card p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+  .blog-card .read {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px; color: var(--purple3);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+
+  /* CTA */
+  .cta { padding: 0 32px 120px; max-width: 1440px; margin: 0 auto; }
+  .cta-block {
+    padding: 100px 48px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-block::before {
+    content: ''; position: absolute; top: -50%; left: -10%; width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(168,85,247,0.25) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-block > * { position: relative; }
+  .cta-block .eyebrow {
+    color: var(--purple3); font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .cta-block h2 {
+    font-size: clamp(48px, 7vw, 96px); font-weight: 900;
+    line-height: 0.94; letter-spacing: -0.04em; margin-bottom: 24px;
+    max-width: 1100px;
+  }
+  .cta-block h2 em { font-family: 'Cal Sans', 'Inter', sans-serif; font-style: normal; font-weight: 400; color: var(--purple3); }
+  .cta-block p { font-size: 18px; color: var(--muted); max-width: 600px; line-height: 1.55; margin-bottom: 40px; }
+  .cta-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); background: var(--bg2);
+    padding: 64px 32px 32px;
+  }
+  .foot { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr; gap: 48px; }
+  @media (max-width: 900px) { .foot { grid-template-columns: 1fr 1fr; } }
+  .foot-brand h5 { font-weight: 800; font-size: 16px; margin-bottom: 12px; }
+  .foot-brand p { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 360px; margin-bottom: 24px; }
+  .foot-col h6 {
+    font-size: 11px; color: var(--dim); font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .foot-col a { display: block; color: var(--muted); font-size: 14px; padding: 6px 0; }
+  .foot-col a:hover { color: var(--purple3); }
+  .foot-base {
+    max-width: 1440px; margin: 56px auto 0; padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--dim); font-size: 13px; flex-wrap: wrap; gap: 16px;
+  }
+  .by-firstlook {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 10px 16px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 999px; font-size: 13px; color: var(--text);
+    transition: all .25s ease;
+  }
+  .by-firstlook:hover { border-color: var(--purple); transform: translateY(-1px); }
+  .by-firstlook .fl-mark { width: 18px; height: 14px; }
+  .by-firstlook span.lbl { color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .by-firstlook span.brand { font-weight: 800; }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow1"></div>
+<div class="glow2"></div>
+
+<header>
+  <div class="nav">
+    <a href="#" class="nav-left">
+      <svg class="nav-mark" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#A855F7" fill-rule="evenodd" d="M 36 0 L 204 0 A 36 36 0 0 1 240 36 L 240 204 A 36 36 0 0 1 204 240 L 36 240 A 36 36 0 0 1 0 204 L 0 36 A 36 36 0 0 1 36 0 Z M 64 64 L 64 176 L 176 176 L 176 132 L 128 132 L 128 108 L 176 108 L 176 64 Z"/>
+      </svg>
+      <span class="nav-name">games<span>growth</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#mission">Mission</a>
+      <a href="#disciplines">Disciplines</a>
+      <a href="#board">Board</a>
+      <a href="#affiliates">Affiliates</a>
+      <a href="#blog">Blog</a>
+    </nav>
+    <a class="btn btn-primary" href="https://join.gamesgrowth.com/signup/member">Apply &rarr;</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <h1 class="hero-title">Games Growth<br><em>Guild.</em></h1>
+      <p class="hero-sub">The largest network of marketing professionals in the games industry, from indie to AAA.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary btn-lg" href="https://join.gamesgrowth.com/signup/member">Apply Now <span class="btn-arrow">&rarr;</span></a>
+        <a class="btn btn-ghost btn-lg" href="#blog">Read the Blog</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <svg class="big-mark" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#A855F7" fill-rule="evenodd" d="M 36 0 L 204 0 A 36 36 0 0 1 240 36 L 240 204 A 36 36 0 0 1 204 240 L 36 240 A 36 36 0 0 1 0 204 L 0 36 A 36 36 0 0 1 36 0 Z M 64 64 L 64 176 L 176 176 L 176 132 L 128 132 L 128 108 L 176 108 L 176 64 Z"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="marquee-section">
+  <div class="marquee-row">
+    <span>Members from</span>
+    <span class="line"></span>
+    <span>indie to AAA</span>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <a class="studio-logo" href="https://www.riotgames.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6cIaEDmWyjyfHNRB04s2Mn/a9d79983387b1174f4c2bf1d40c3ed6a/rg_logo.png" alt="Riot Games"></a>
+      <a class="studio-logo" href="https://www.2k.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/4rwPCbci4ayLbWfgBhAiua/6e3f8cdadebbef2e4fb14924738cc2f8/2k-logo.png" alt="2K"></a>
+      <a class="studio-logo" href="https://www.scopely.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/2jnaxGgFGjeuyhRSH73EVu/c56a23fb33438e3461eef88c18b7f3d3/scopeloywhite.png" alt="Scopely"></a>
+      <a class="studio-logo" href="https://www.bungie.net"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6FvUAHS3j9bIexVdUoJWIU/419e27b5c09d77ca74b6df264d0f6d8d/bungie_logo.png" alt="Bungie"></a>
+      <a class="studio-logo" href="https://www.sony.co.uk"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/3aA0rdasdW9kHynagfeTC9/cd9dbb3271ff11558d30a6778ede77bd/sony_logo.png" alt="Sony"></a>
+      <a class="studio-logo" href="https://peoplecanfly.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6MESBAB1S0agJMVrM8sJvD/23478959db688354fc32fa192e2ce50c/people_can_fly_logo.png" alt="People Can Fly"></a>
+      <a class="studio-logo" href="https://gravitywell.games"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6e6R1WhyJ37WITUYYu8jN1/7faf0f76502a74f50605d5474fb2ddf8/gravity_well.png" alt="Gravity Well"></a>
+      <a class="studio-logo" href="https://eslfaceitgroup.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/5fzkawInBZv8Z8PmieWbnz/e6e6cb83e8eef0af5aa7334a3e4f64c7/esl.png" alt="ESL FACEIT Group"></a>
+      <a class="studio-logo" href="https://omedastudios.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6faZe1msDzPZ0tYXGgxDa1/16e41ee1f4d14d2a8ee226d5d01b463e/omeda_logo.png" alt="Omeda"></a>
+      <a class="studio-logo" href="https://survios.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/692XZw1B8SHaO1ceklYsyJ/05a339c76d84d0caaf3fb5f6f1d0e84a/survios_logo.png" alt="Survios"></a>
+      <a class="studio-logo" href="https://www.theorycraftgames.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/36QrmFMLicxGWyduyF6OgU/587d6d1fc2fd8e5aa25c7dd5a37b48bb/theroycraft.png" alt="Theorycraft"></a>
+      <a class="studio-logo" href="https://www.skybound.com"><img src="https://cdn.firstlook.gg/assets/skybound.d1uqPeZv.webp" alt="Skybound"></a>
+      <a class="studio-logo" href="https://playableworlds.com"><img src="https://cdn.firstlook.gg/assets/playable-worlds.B9W_8sr5.webp" alt="Playable Worlds"></a>
+      <a class="studio-logo" href="https://www.systemera.net"><img src="https://cdn.firstlook.gg/assets/system-era.B3X12gSE.webp" alt="System Era"></a>
+      <a class="studio-logo" href="https://nightstreet.games"><img src="https://cdn.firstlook.gg/assets/night-street.BywI0urz.webp" alt="Night Street Games"></a>
+      <a class="studio-logo" href="https://www.brainjar.games"><img src="https://cdn.firstlook.gg/assets/brain-jar-games.CQEk6iVi.webp" alt="Brain Jar Games"></a>
+      <a class="studio-logo" href="https://www.bulkhead.com"><img src="https://cdn.firstlook.gg/assets/bulkhead.NlNWKmxB.svg" alt="Bulkhead"></a>
+      <a class="studio-logo" href="https://onemoregame.gg"><img src="https://cdn.firstlook.gg/assets/one-more-game.C6cBN5Ad.webp" alt="One More Game"></a>
+      <a class="studio-logo" href="https://www.wolcenstudio.com"><img src="https://cdn.firstlook.gg/assets/wolcen-studio.GPTdj9XI.webp" alt="Wolcen Studio"></a>
+      <a class="studio-logo" href="https://stoke.games"><img src="https://cdn.firstlook.gg/assets/stoke.4--z2wfV.webp" alt="Stoke"></a>
+      <a class="studio-logo" href="https://dreamhaven.com"><img src="https://cdn.firstlook.gg/assets/dreamhaven.DAwbuZuF.webp" alt="Dreamhaven"></a>
+      <a class="studio-logo" href="https://www.ruckus-games.com"><img src="https://cdn.firstlook.gg/assets/ruckus-games.BvO8d2oz.webp" alt="Ruckus Games"></a>
+      <a class="studio-logo" href="https://bigcheesestudio.com"><img src="https://cdn.firstlook.gg/assets/big-cheese-studio.BOhQ9X9c.svg" alt="Big Cheese Studio"></a>
+      <a class="studio-logo" href="https://treehousegames.com"><img src="https://cdn.firstlook.gg/assets/treehouse-games.DQTMyzGJ.webp" alt="Treehouse Games"></a>
+      <a class="studio-logo" href="https://goosebyte.games"><img src="https://cdn.firstlook.gg/assets/goosebyte-games.B0PG54Mz.webp" alt="Goosebyte Games"></a>
+      <a class="studio-logo" href="https://bonfirestudios.com"><img src="https://cdn.firstlook.gg/assets/bonfire.v6dOGR5g.webp" alt="Bonfire"></a>
+      <a class="studio-logo" href="https://www.badrobotgames.com"><img src="https://cdn.firstlook.gg/assets/bad-robot-games.DYtyHP71.webp" alt="Bad Robot Games"></a>
+      <a class="studio-logo" href="https://noodlecat.com"><img src="https://cdn.firstlook.gg/assets/noodle-cat-games.Qa6LRxya.webp" alt="Noodle Cat Games"></a>
+    </div>
+    <div class="marquee-track" aria-hidden="true">
+      <a class="studio-logo" href="https://www.riotgames.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6cIaEDmWyjyfHNRB04s2Mn/a9d79983387b1174f4c2bf1d40c3ed6a/rg_logo.png" alt="Riot Games"></a>
+      <a class="studio-logo" href="https://www.2k.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/4rwPCbci4ayLbWfgBhAiua/6e3f8cdadebbef2e4fb14924738cc2f8/2k-logo.png" alt="2K"></a>
+      <a class="studio-logo" href="https://www.scopely.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/2jnaxGgFGjeuyhRSH73EVu/c56a23fb33438e3461eef88c18b7f3d3/scopeloywhite.png" alt="Scopely"></a>
+      <a class="studio-logo" href="https://www.bungie.net"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6FvUAHS3j9bIexVdUoJWIU/419e27b5c09d77ca74b6df264d0f6d8d/bungie_logo.png" alt="Bungie"></a>
+      <a class="studio-logo" href="https://www.sony.co.uk"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/3aA0rdasdW9kHynagfeTC9/cd9dbb3271ff11558d30a6778ede77bd/sony_logo.png" alt="Sony"></a>
+      <a class="studio-logo" href="https://peoplecanfly.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6MESBAB1S0agJMVrM8sJvD/23478959db688354fc32fa192e2ce50c/people_can_fly_logo.png" alt="People Can Fly"></a>
+      <a class="studio-logo" href="https://gravitywell.games"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6e6R1WhyJ37WITUYYu8jN1/7faf0f76502a74f50605d5474fb2ddf8/gravity_well.png" alt="Gravity Well"></a>
+      <a class="studio-logo" href="https://eslfaceitgroup.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/5fzkawInBZv8Z8PmieWbnz/e6e6cb83e8eef0af5aa7334a3e4f64c7/esl.png" alt="ESL FACEIT Group"></a>
+      <a class="studio-logo" href="https://omedastudios.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/6faZe1msDzPZ0tYXGgxDa1/16e41ee1f4d14d2a8ee226d5d01b463e/omeda_logo.png" alt="Omeda"></a>
+      <a class="studio-logo" href="https://survios.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/692XZw1B8SHaO1ceklYsyJ/05a339c76d84d0caaf3fb5f6f1d0e84a/survios_logo.png" alt="Survios"></a>
+      <a class="studio-logo" href="https://www.theorycraftgames.com"><img src="https://images.ctfassets.net/0g5lkmj1fcd0/36QrmFMLicxGWyduyF6OgU/587d6d1fc2fd8e5aa25c7dd5a37b48bb/theroycraft.png" alt="Theorycraft"></a>
+      <a class="studio-logo" href="https://www.skybound.com"><img src="https://cdn.firstlook.gg/assets/skybound.d1uqPeZv.webp" alt="Skybound"></a>
+      <a class="studio-logo" href="https://playableworlds.com"><img src="https://cdn.firstlook.gg/assets/playable-worlds.B9W_8sr5.webp" alt="Playable Worlds"></a>
+      <a class="studio-logo" href="https://www.systemera.net"><img src="https://cdn.firstlook.gg/assets/system-era.B3X12gSE.webp" alt="System Era"></a>
+      <a class="studio-logo" href="https://nightstreet.games"><img src="https://cdn.firstlook.gg/assets/night-street.BywI0urz.webp" alt="Night Street Games"></a>
+      <a class="studio-logo" href="https://www.brainjar.games"><img src="https://cdn.firstlook.gg/assets/brain-jar-games.CQEk6iVi.webp" alt="Brain Jar Games"></a>
+      <a class="studio-logo" href="https://www.bulkhead.com"><img src="https://cdn.firstlook.gg/assets/bulkhead.NlNWKmxB.svg" alt="Bulkhead"></a>
+      <a class="studio-logo" href="https://onemoregame.gg"><img src="https://cdn.firstlook.gg/assets/one-more-game.C6cBN5Ad.webp" alt="One More Game"></a>
+      <a class="studio-logo" href="https://www.wolcenstudio.com"><img src="https://cdn.firstlook.gg/assets/wolcen-studio.GPTdj9XI.webp" alt="Wolcen Studio"></a>
+      <a class="studio-logo" href="https://stoke.games"><img src="https://cdn.firstlook.gg/assets/stoke.4--z2wfV.webp" alt="Stoke"></a>
+      <a class="studio-logo" href="https://dreamhaven.com"><img src="https://cdn.firstlook.gg/assets/dreamhaven.DAwbuZuF.webp" alt="Dreamhaven"></a>
+      <a class="studio-logo" href="https://www.ruckus-games.com"><img src="https://cdn.firstlook.gg/assets/ruckus-games.BvO8d2oz.webp" alt="Ruckus Games"></a>
+      <a class="studio-logo" href="https://bigcheesestudio.com"><img src="https://cdn.firstlook.gg/assets/big-cheese-studio.BOhQ9X9c.svg" alt="Big Cheese Studio"></a>
+      <a class="studio-logo" href="https://treehousegames.com"><img src="https://cdn.firstlook.gg/assets/treehouse-games.DQTMyzGJ.webp" alt="Treehouse Games"></a>
+      <a class="studio-logo" href="https://goosebyte.games"><img src="https://cdn.firstlook.gg/assets/goosebyte-games.B0PG54Mz.webp" alt="Goosebyte Games"></a>
+      <a class="studio-logo" href="https://bonfirestudios.com"><img src="https://cdn.firstlook.gg/assets/bonfire.v6dOGR5g.webp" alt="Bonfire"></a>
+      <a class="studio-logo" href="https://www.badrobotgames.com"><img src="https://cdn.firstlook.gg/assets/bad-robot-games.DYtyHP71.webp" alt="Bad Robot Games"></a>
+      <a class="studio-logo" href="https://noodlecat.com"><img src="https://cdn.firstlook.gg/assets/noodle-cat-games.Qa6LRxya.webp" alt="Noodle Cat Games"></a>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="mission-head">
+    <div class="section-num">&sect;01 / Mission</div>
+    <h2>Our <em>Mission.</em></h2>
+  </div>
+
+  <div class="mission-body">
+    <div></div>
+    <p>We're here to push the industry forward by lifting each other up: swapping real stories, bold experiments, honest lessons, and practical strategies that move the needle for everyone.</p>
+    <p>Through monthly talks, tactical deep dives, idea jams, and open peer support, we've built a space where game marketing and publishing pros can trade what's actually working (and what's not), across launches, growth campaigns, and GTM strategies.</p>
+  </div>
+
+</section>
+
+<!-- DISCIPLINES -->
+<section class="disc" id="disciplines">
+  <div class="disc-inner">
+    <div class="disc-head">
+      <div class="section-num">&sect;02 / Disciplines</div>
+      <h2>Disciplines<br>we bring <em>together.</em></h2>
+      <p>We bring together specialists from every marketing discipline shaping how games reach players.</p>
+    </div>
+
+    <div class="disc-grid">
+      <div class="disc-card"><div class="num">01</div><h4>Community &amp; Social</h4></div>
+      <div class="disc-card"><div class="num">02</div><h4>UA &amp; Growth</h4></div>
+      <div class="disc-card"><div class="num">03</div><h4>Influencer &amp; Creator Relations</h4></div>
+      <div class="disc-card"><div class="num">04</div><h4>Lifecycle &amp; CRM</h4></div>
+      <div class="disc-card"><div class="num">05</div><h4>Brand Marketing</h4></div>
+      <div class="disc-card"><div class="num">06</div><h4>Product Marketing</h4></div>
+      <div class="disc-card"><div class="num">07</div><h4>PR &amp; Communications</h4></div>
+      <div class="disc-card"><div class="num">08</div><h4>Analytics</h4></div>
+      <div class="disc-card"><div class="num">09</div><h4>Event Marketing</h4></div>
+      <div class="disc-card"><div class="num">10</div><h4>Publishing</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVISORY BOARD -->
+<section class="board" id="board">
+  <div class="board-head">
+    <div class="section-num">&sect;03 / Advisory Board</div>
+    <h2>Built by the <em>greatest marketing minds</em><br>in games.</h2>
+  </div>
+
+  <div class="advisors-grid">
+    <a class="advisor-card" href="https://www.linkedin.com/in/nicoleanetralewis/">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/nikki-lewis-5QnByR_k.png" alt="Nikki Lewis" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Nikki Lewis</div>
+        <div class="co">Haveli</div>
+        <div class="role">Operating Partner, Marketing &amp; Publishing</div>
+        <div class="prev">Prev: Riot Games, Epic</div>
+      </div>
+    </a>
+
+    <a class="advisor-card" href="https://www.linkedin.com/in/leoolebe/">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/leo-olebe-CET8t_uu.png" alt="Leo Olebe" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Leo Olebe</div>
+        <div class="co">Olebe Media Group / Games for Change</div>
+        <div class="role">CEO / Board Chair</div>
+        <div class="prev">Prev: Microsoft, Google, Meta</div>
+      </div>
+    </a>
+
+    <a class="advisor-card" href="https://www.linkedin.com/in/connorbridgeman/">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/connor-bridgeman-BgXo5FTx.png" alt="Connor Bridgeman" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Connor Bridgeman</div>
+        <div class="co">Lyrical Games</div>
+        <div class="role">Director of Marketing</div>
+        <div class="prev">Prev: Humble Games, EA</div>
+      </div>
+    </a>
+
+    <a class="advisor-card" href="https://www.linkedin.com/in/jeff-legaspi/">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/jeff-legaspi-D8_807ke.png" alt="Jeff Legaspi" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Jeff Legaspi</div>
+        <div class="co">Fictions</div>
+        <div class="role">Director of Marketing</div>
+        <div class="prev">Prev: Annapurna Interactive</div>
+      </div>
+    </a>
+
+    <a class="advisor-card" href="https://www.linkedin.com/in/edechen/">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/eden-chen-CZI2y5Gn.png" alt="Eden Chen" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Eden Chen</div>
+        <div class="co">Pragma</div>
+        <div class="role">CEO</div>
+      </div>
+    </a>
+
+    <a class="advisor-card" href="https://www.linkedin.com/in/wooderic/">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/eric-wood-BQYXAje-.png" alt="Eric Wood" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Eric Wood</div>
+        <div class="co">Scopely</div>
+        <div class="role">Senior Vice President, Publishing</div>
+        <div class="prev">Prev: Activision Blizzard, Nike</div>
+      </div>
+    </a>
+
+    <a class="advisor-card" href="https://www.linkedin.com/in/krystalherring/">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/krystal-herring-DEozPZI2.png" alt="Krystal Herring" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Krystal Herring</div>
+        <div class="co">Twitch</div>
+        <div class="role">Head of Global Events</div>
+        <div class="prev">Prev: Ubisoft</div>
+      </div>
+    </a>
+
+    <a class="advisor-card" href="https://www.linkedin.com/in/thevtran/">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/victoria-tran-CLG2Zea3.png" alt="Victoria Tran" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Victoria Tran</div>
+        <div class="co">Innersloth</div>
+        <div class="role">Director of Communications</div>
+        <div class="prev">Prev: Kitfox Games</div>
+      </div>
+    </a>
+
+    <a class="advisor-card" href="https://www.linkedin.com/in/thomas-ko/">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/thomas-ko-C9-5rFyN.png" alt="Thomas Ko" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Thomas Ko</div>
+        <div class="co">Krafton</div>
+        <div class="role">Head of Publishing Platforms</div>
+        <div class="prev">Prev: Epic, Samsung</div>
+      </div>
+    </a>
+
+    <div class="advisor-card">
+      <div class="advisor-photo"><img src="https://gamesgrowth.com/assets/kyle-billings-CeCdRzPD.png" alt="Kyle Billings" loading="lazy"></div>
+      <div class="advisor-info">
+        <div class="name">Kyle Billings</div>
+        <div class="co">Epic Games</div>
+        <div class="role">Director of Strategy and Business Ops</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AFFILIATES -->
+<section class="affiliates" id="affiliates">
+  <div class="affiliates-inner">
+    <div class="affiliates-head">
+      <div class="section-num">&sect;04 / Affiliates</div>
+      <h2>Our <em>Affiliates.</em></h2>
+      <p>Partnering with leading organizations in the games industry.</p>
+    </div>
+
+    <div class="affiliates-grid">
+      <a class="affiliate" href="https://www.firstlook.gg">
+        <div class="affiliate-logo"><img src="https://gamesgrowth.com/assets/firstlook-logo-DIvmj7qo.png" alt="FirstLook.gg"></div>
+        <div class="affiliate-content">
+          <h4>FirstLook.gg</h4>
+          <p>FirstLook.gg is a player relationship platform built for modern game studios. It unifies player growth, insights, and operations, helping studios build stronger, longer lasting relationships with their communities.</p>
+          <span class="visit">Visit &rarr;</span>
+        </div>
+      </a>
+
+      <a class="affiliate" href="https://indiebi.com">
+        <div class="affiliate-logo"><img src="https://gamesgrowth.com/assets/indiebi-logo-efpmjtEx.png" alt="IndieBI"></div>
+        <div class="affiliate-content">
+          <h4>IndieBI</h4>
+          <p>IndieBI is a comprehensive business intelligence platform for game developers and publishers. It provides real time sales tracking, advanced analytics, and actionable insights to maximize commercial success.</p>
+          <span class="visit">Visit &rarr;</span>
+        </div>
+      </a>
+
+      <a class="affiliate" href="https://gamediscover.co">
+        <div class="affiliate-logo"><img src="https://gamesgrowth.com/assets/gamediscoverco-logo-CyqaAYHV.png" alt="GameDiscoverCo"></div>
+        <div class="affiliate-content">
+          <h4>GameDiscoverCo</h4>
+          <p>GameDiscoverCo is a leading video game discovery agency, featuring a popular newsletter on game platforms and discovery, plus multiple layers of interactive SaaS data with deep insight into PC and console game popularity, with its GDCo Pro data used by 80+ key companies.</p>
+          <span class="visit">Visit &rarr;</span>
+        </div>
+      </a>
+
+      <a class="affiliate" href="https://publsh.com/">
+        <div class="affiliate-logo"><img src="https://gamesgrowth.com/assets/publsh-logo-Dv6Md5IY.png" alt="PUBLSH"></div>
+        <div class="affiliate-content">
+          <h4>PUBLSH</h4>
+          <p>PUBLSH is a NEXT GENERATION CONSULTING GROUP founded by game industry veterans that offers publishing and marketing services, enabling publishers, developers, and investors to achieve commercial success.</p>
+          <span class="visit">Visit &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-section" id="events">
+  <div class="events-head">
+    <div class="section-num">&sect;05 / Events</div>
+    <h2>Upcoming<br><em>Events.</em></h2>
+    <p>Join us at industry events throughout the year. Digital sessions and in person gatherings where the Guild meets up.</p>
+  </div>
+
+  <div class="events-grid">
+    <a class="event-card" href="https://luma.com/gggatgdc">
+      <div class="event-logo"><img src="https://gamesgrowth.com/assets/gdc-logo-DKaKScYd.png" alt="GDC"></div>
+      <div class="event-meta">Mar 10 &middot; 2:00 to 3:30 PM</div>
+      <h3>Coffee &amp; Conversations at GDC</h3>
+      <div class="event-sub">Twitch Office, San Francisco</div>
+      <span class="event-tag">In Person</span>
+    </a>
+
+    <div class="event-card coming-soon">
+      <div class="event-meta">Coming Soon</div>
+      <h3>More gatherings.<br>More cities.</h3>
+      <div class="event-sub">Stay tuned for events in London, Berlin, Seoul, Tokyo, LA, NYC, and Austin.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog-section" id="blog">
+  <div class="blog-inner">
+    <div class="blog-head">
+      <div class="section-num">&sect;06 / Blog</div>
+      <h2>From the <em>Guild.</em></h2>
+      <p>Insights, strategies, and stories from the Games Growth Guild community.</p>
+    </div>
+
+    <div class="blog-grid">
+      <a class="blog-card" href="/blog/introducing-the-games-growth-guild">
+        <div class="blog-cover"><img src="https://lpgssmpzvropzlfapcgq.supabase.co/storage/v1/object/public/blog-images/featured/xdve3jxvre8-1762274300182.png" alt="Introducing the Games Growth Guild" loading="lazy"></div>
+        <div class="blog-body">
+          <div class="blog-meta">Kimberley Fogg &middot; Nov 4, 2025</div>
+          <h3>Introducing the Games Growth Guild</h3>
+          <p>The people behind game growth deserve a space built for them. Today, we're proud to announce the launch of the Games Growth Guild.</p>
+          <span class="read">Read more &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <h5>games<span style="color: var(--purple3);">growth</span></h5>
+      <p>A global network of marketing pros driving the games industry forward, from indie to AAA.</p>
+      <p style="font-size: 13px; color: var(--muted);">Want to get in touch? Reach us on <a href="mailto:contact@gamesgrowth.com" style="color: var(--purple3);">contact@gamesgrowth.com</a></p>
+    </div>
+    <div class="foot-col">
+      <h6>Guild</h6>
+      <a href="#mission">Mission</a>
+      <a href="#disciplines">Disciplines</a>
+      <a href="#board">Board</a>
+      <a href="#affiliates">Affiliates</a>
+      <a href="#events">Events</a>
+      <a href="#blog">Blog</a>
+    </div>
+    <div class="foot-col">
+      <h6>Members</h6>
+      <a href="https://join.gamesgrowth.com/signup/member">Apply</a>
+      <a href="https://join.gamesgrowth.com/login">Log In</a>
+    </div>
+    <div class="foot-col">
+      <h6>Affiliates</h6>
+      <a href="https://firstlook.gg">FirstLook.gg</a>
+      <a href="https://indiebi.com">IndieBI</a>
+      <a href="https://gamediscover.co">GameDiscoverCo</a>
+      <a href="https://publsh.com">PUBLSH</a>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span class="mono" style="font-size: 11px; letter-spacing: 1px;">&copy; 2026 GAMES GROWTH GUILD. ALL RIGHTS RESERVED.</span>
+    <a class="by-firstlook" href="https://firstlook.gg">
+      <svg class="fl-mark" viewBox="0 0 83 67" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#F5F5F7" d="M41.5,8.4 C47.9,0.8 58.3,-2 67.5,1.4 C76.8,4.9 83,13.8 83,23.7 L83,43.3 C83,53.2 76.8,62.1 67.5,65.6 C58.3,69 47.9,66.2 41.5,58.6 C35.1,66.2 24.7,69 15.5,65.6 C6.2,62.1 0,53.2 0,43.3 L0,23.7 C0,10.6 10.5,0 23.5,0 C30.5,0 37,3.1 41.5,8.4 Z M15.4,16.8 C10,16.8 5.7,21.1 5.7,26.5 L5.7,40.5 C5.7,45.9 10,50.2 15.4,50.2 C20.7,50.2 25.1,45.9 25.1,40.5 L25.1,26.5 C25.1,21.1 20.7,16.8 15.4,16.8 Z M51.2,16.8 C45.8,16.8 41.5,21.1 41.5,26.5 L41.5,40.5 C41.5,45.9 45.8,50.2 51.2,50.2 C56.5,50.2 60.9,45.9 60.9,40.5 L60.9,26.5 C60.9,21.1 56.5,16.8 51.2,16.8 Z"/>
+      </svg>
+      <span class="lbl">Powered by</span>
+      <span class="brand">FirstLook.gg</span>
+    </a>
+  </div>
+</footer>
+
+<script>
+  // Graceful fallback for company logos in marquee
+  document.querySelectorAll('.studio-logo img').forEach(img => {
+    img.addEventListener('error', () => {
+      const wrap = img.closest('.studio-logo');
+      if (!wrap) return;
+      const text = img.alt || 'Studio';
+      wrap.classList.remove('studio-logo');
+      wrap.classList.add('studio-text');
+      wrap.innerHTML = text;
+    });
+  });
+</script>
+
+</body>
+</html>

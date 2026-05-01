@@ -1,0 +1,10 @@
+.DS_Store
+.vercel
+node_modules
+*.log
+.env
+.env.local
+.env.*.local
+.cache
+.idea
+.vscode

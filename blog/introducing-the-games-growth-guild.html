@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introducing the Games Growth Guild | Games Growth Guild</title>
+<meta name="description" content="The people behind game growth deserve a space built for them. Today, we're proud to announce the launch of the Games Growth Guild.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0B0E;
+    --bg2: #0F1116;
+    --surface: #14171E;
+    --surface2: #1A1E27;
+    --border: #232830;
+    --border2: #2D333E;
+    --text: #F5F5F7;
+    --muted: #9097A1;
+    --dim: #5A626E;
+    --purple: #A855F7;
+    --purple2: #7C3AED;
+    --purple3: #C084FC;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--purple); color: #fff; }
+
+  .grid-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(168,85,247,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,85,247,0.035) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 80%);
+  }
+  .glow1 { position: absolute; top: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(168,85,247,0.18), transparent 60%); filter: blur(60px); pointer-events: none; z-index: 0; }
+
+  main, header, footer, article { position: relative; z-index: 1; }
+
+  /* NAV */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(18px);
+    background: rgba(10,11,14,0.78);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav {
+    max-width: 1440px; margin: 0 auto; padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-left { display: flex; align-items: center; gap: 12px; }
+  .nav-mark { width: 32px; height: 32px; }
+  .nav-name { font-weight: 800; letter-spacing: -0.01em; font-size: 16px; }
+  .nav-name span { color: var(--purple3); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: var(--text); }
+  @media (max-width: 800px) { .nav-links { display: none; } }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px;
+    transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+    cursor: pointer; border: 0; font-family: inherit; white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--purple); color: #fff;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 8px 24px rgba(168,85,247,0.35);
+  }
+  .btn-primary:hover { background: var(--purple2); transform: translateY(-1px); }
+
+  /* BACK LINK */
+  .back-link {
+    max-width: 760px; margin: 48px auto 0; padding: 0 32px;
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase;
+    transition: color .2s ease;
+  }
+  .back-link:hover { color: var(--purple3); }
+
+  /* ARTICLE */
+  article { max-width: 760px; margin: 0 auto; padding: 32px 32px 80px; }
+
+  .post-meta {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--purple3); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 24px; flex-wrap: wrap;
+  }
+  .post-meta .sep { color: var(--dim); }
+
+  h1.post-title {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 900; line-height: 1; letter-spacing: -0.04em;
+    margin-bottom: 24px;
+  }
+  h1.post-title em { font-family: 'Cal Sans', 'Inter', sans-serif; font-style: normal; font-weight: 400; color: var(--purple3); }
+
+  .post-deck {
+    font-family: 'Cal Sans', 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(22px, 2.5vw, 28px); line-height: 1.4;
+    color: var(--muted); margin-bottom: 48px; max-width: 640px;
+    letter-spacing: -0.01em;
+  }
+
+  .post-cover {
+    width: 100%; aspect-ratio: 16/9;
+    border-radius: 12px; overflow: hidden;
+    margin-bottom: 56px;
+    border: 1px solid var(--border);
+  }
+  .post-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* PROSE */
+  .prose { font-size: 18px; line-height: 1.75; color: var(--text); }
+  .prose p { margin-bottom: 28px; color: var(--text); opacity: 0.9; }
+  .prose p:first-of-type::first-letter {
+    font-family: 'Cal Sans', 'Inter', sans-serif;
+    float: left; font-size: 80px; line-height: 0.85;
+    margin-right: 12px; margin-top: 6px;
+    color: var(--purple3); font-weight: 400;
+  }
+  .prose h2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 900; letter-spacing: -0.03em;
+    line-height: 1.1; margin: 56px 0 20px;
+    color: var(--text);
+  }
+  .prose h2 em { font-family: 'Cal Sans', 'Inter', sans-serif; font-style: normal; font-weight: 400; color: var(--purple3); }
+  .prose h3 {
+    font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+    margin: 40px 0 16px; color: var(--text);
+  }
+  .prose ul {
+    list-style: none; padding: 0; margin: 0 0 28px 0;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .prose ul li {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color .2s ease;
+  }
+  .prose ul li:hover { border-color: var(--purple); }
+  .prose ul li .ico { font-size: 22px; flex-shrink: 0; }
+  .prose ul li .text { flex: 1; font-size: 16px; line-height: 1.5; color: var(--text); }
+  .prose ul li .text strong { font-weight: 800; }
+
+  /* Advisor list inside post */
+  .advisor-list {
+    list-style: none; padding: 0; margin: 0 0 28px 0;
+    display: flex; flex-direction: column;
+  }
+  .advisor-list li {
+    padding: 18px 0; border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: baseline; gap: 16px;
+  }
+  .advisor-list li:last-child { border-bottom: 1px solid var(--border); }
+  .advisor-list .name { font-weight: 800; font-size: 17px; letter-spacing: -0.02em; }
+  .advisor-list .role { font-size: 14px; color: var(--muted); }
+  .advisor-list .prev {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--dim); letter-spacing: 1px; justify-self: end;
+    text-align: right;
+  }
+  @media (max-width: 600px) {
+    .advisor-list li { grid-template-columns: 1fr; gap: 4px; }
+    .advisor-list .prev { justify-self: start; text-align: left; }
+  }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    margin: 56px 0;
+    padding: 40px 0;
+    border-top: 2px solid var(--purple);
+    border-bottom: 2px solid var(--purple);
+  }
+  .pull-quote blockquote {
+    font-family: 'Cal Sans', 'Inter', sans-serif; font-weight: 400;
+    font-size: clamp(24px, 3vw, 36px); line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .pull-quote cite {
+    display: block;
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .pull-quote cite strong { color: var(--purple3); }
+
+  /* CTA after post */
+  .post-cta {
+    margin-top: 80px; padding: 48px 40px;
+    background: linear-gradient(135deg, rgba(168,85,247,0.18), rgba(76,29,149,0.05));
+    border: 1px solid rgba(168,85,247,0.25);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .post-cta h3 { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .post-cta h3 em { font-family: 'Cal Sans', 'Inter', sans-serif; font-style: normal; font-weight: 400; color: var(--purple3); }
+  .post-cta p { color: var(--muted); margin-bottom: 24px; font-size: 15px; line-height: 1.55; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); background: var(--bg2);
+    padding: 64px 32px 32px;
+  }
+  .foot { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr; gap: 48px; }
+  @media (max-width: 900px) { .foot { grid-template-columns: 1fr 1fr; } }
+  .foot-brand h5 { font-weight: 800; font-size: 16px; margin-bottom: 12px; }
+  .foot-brand p { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 360px; margin-bottom: 16px; }
+  .foot-col h6 {
+    font-size: 11px; color: var(--dim); font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .foot-col a { display: block; color: var(--muted); font-size: 14px; padding: 6px 0; }
+  .foot-col a:hover { color: var(--purple3); }
+  .foot-base {
+    max-width: 1440px; margin: 56px auto 0; padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--dim); font-size: 13px; flex-wrap: wrap; gap: 16px;
+  }
+  .by-firstlook {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 10px 16px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 999px; font-size: 13px; color: var(--text);
+    transition: all .25s ease;
+  }
+  .by-firstlook:hover { border-color: var(--purple); }
+  .by-firstlook .fl-mark { width: 18px; height: 14px; }
+  .by-firstlook span.lbl { color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .by-firstlook span.brand { font-weight: 800; }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow1"></div>
+
+<header>
+  <div class="nav">
+    <a href="/" class="nav-left">
+      <svg class="nav-mark" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#A855F7" fill-rule="evenodd" d="M 36 0 L 204 0 A 36 36 0 0 1 240 36 L 240 204 A 36 36 0 0 1 204 240 L 36 240 A 36 36 0 0 1 0 204 L 0 36 A 36 36 0 0 1 36 0 Z M 64 64 L 64 176 L 176 176 L 176 132 L 128 132 L 128 108 L 176 108 L 176 64 Z"/>
+      </svg>
+      <span class="nav-name">games<span>growth</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="/#mission">Mission</a>
+      <a href="/#disciplines">Disciplines</a>
+      <a href="/#board">Board</a>
+      <a href="/#blog">Blog</a>
+    </nav>
+    <a class="btn btn-primary" href="https://join.gamesgrowth.com/signup/member">Apply &rarr;</a>
+  </div>
+</header>
+
+<main>
+
+<a class="back-link" href="/#blog">&larr; Back to Blog</a>
+
+<article>
+
+  <div class="post-meta">
+    <span>Kimberley Fogg</span>
+    <span class="sep">/</span>
+    <span>Nov 4, 2025</span>
+    <span class="sep">/</span>
+    <span>News</span>
+  </div>
+
+  <h1 class="post-title">Introducing the <em>Games Growth Guild.</em></h1>
+
+  <p class="post-deck">The people behind game growth deserve a space built for them.</p>
+
+  <div class="post-cover">
+    <img src="https://lpgssmpzvropzlfapcgq.supabase.co/storage/v1/object/public/blog-images/featured/xdve3jxvre8-1762274300182.png" alt="Introducing the Games Growth Guild">
+  </div>
+
+  <div class="prose">
+
+    <p>Today, we're proud to announce the launch of the Games Growth Guild (GGG), a collective of marketing and publishing professionals from across the games industry, spanning indie studios, mobile leaders, and AAA publishers.</p>
+
+    <p>From Brain Jar, Gardens, and Ruckus Games to Scopely, Riot, and Epic, our members share one simple mission: push the industry forward by lifting each other up.</p>
+
+    <h2>Why the Guild <em>Exists.</em></h2>
+
+    <p>Marketing and publishing are some of the most collaborative, creative, and fast changing parts of game development, yet there's never been a true home for the people leading that work.</p>
+
+    <p>The Games Growth Guild was created to change that. It's a space for sharing real lessons, bold experiments, honest failures, and proven strategies, all designed to help the games industry grow stronger together.</p>
+
+    <p>We bring together experts across every discipline:</p>
+
+    <ul>
+      <li><span class="ico">🎯</span><span class="text"><strong>Community &amp; Social</strong></span></li>
+      <li><span class="ico">📈</span><span class="text"><strong>User Acquisition &amp; Growth</strong></span></li>
+      <li><span class="ico">🎤</span><span class="text"><strong>Influencer &amp; Creator Relations</strong></span></li>
+      <li><span class="ico">💌</span><span class="text"><strong>Lifecycle &amp; CRM</strong></span></li>
+      <li><span class="ico">🎟️</span><span class="text"><strong>Events &amp; Partnerships</strong></span></li>
+      <li><span class="ico">🎨</span><span class="text"><strong>Brand, Product Marketing &amp; PR</strong></span></li>
+    </ul>
+
+    <p>Through monthly talks, tactical exchanges, and peer support, GGG provides a trusted space to discuss what's working (and what isn't) across launches, growth campaigns, and go to market strategies.</p>
+
+    <h2>A Community Led by <em>Industry Builders.</em></h2>
+
+    <p>The Games Growth Guild is guided by an advisory board representing the diverse voices shaping how games reach players:</p>
+
+    <ul class="advisor-list">
+      <li>
+        <div>
+          <div class="name">Nikki Lewis</div>
+          <div class="role">Operating Partner, Marketing &amp; Publishing @ Haveli</div>
+        </div>
+        <div class="prev">prev. Riot, Epic</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Leo Olebe</div>
+          <div class="role">CEO, Olebe Media Group</div>
+        </div>
+        <div class="prev">prev. Microsoft, Google, Meta</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Connor Bridgeman</div>
+          <div class="role">Director of Marketing, Lyrical Games</div>
+        </div>
+        <div class="prev">prev. EA, Ubisoft</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Jeff Legaspi</div>
+          <div class="role">Director of Marketing, Fictions</div>
+        </div>
+        <div class="prev">prev. Annapurna Interactive</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Eden Chen</div>
+          <div class="role">CEO, Pragma</div>
+        </div>
+        <div class="prev"></div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Eric Wood</div>
+          <div class="role">SVP Publishing, Scopely</div>
+        </div>
+        <div class="prev">prev. Activision Blizzard, Nike</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Krystal Herring</div>
+          <div class="role">Head of Global Events, Twitch</div>
+        </div>
+        <div class="prev">prev. Ubisoft</div>
+      </li>
+      <li>
+        <div>
+          <div class="name">Victoria Tran</div>
+          <div class="role">Director of Communications, Innersloth (Among Us)</div>
+        </div>
+        <div class="prev"></div>
+      </li>
+    </ul>
+
+    <p>Together, they're helping shape the Guild's programming, from thought leadership talks to mentorship initiatives and annual recognition awards.</p>
+
+    <h2>Voices from the <em>Guild.</em></h2>
+
+    <div class="pull-quote">
+      <blockquote>"Game developers have solved incredible technical challenges, but marketing and distribution remain the hardest problems. The Games Growth Guild brings together the industry's best to share best practices and resources to help great games find their players."</blockquote>
+      <cite><strong>Eden Chen</strong> &middot; CEO, Pragma &middot; Founder, Games Growth Guild</cite>
+    </div>
+
+    <h2>Join the <em>Guild.</em></h2>
+
+    <p>If you believe that growth in games should be open, collaborative, and generous, this guild is for you.</p>
+
+    <p>Whether you're running community campaigns, building go to market strategies, or crafting creative that inspires players, GGG is a place to connect, share, and learn from others who do the same.</p>
+
+  </div>
+
+  <div class="post-cta">
+    <h3>Ready to <em>join?</em></h3>
+    <p>Membership is free. Verification keeps the room real.</p>
+    <a class="btn btn-primary" href="https://join.gamesgrowth.com/signup/member">Apply Now &rarr;</a>
+  </div>
+
+</article>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <h5>games<span style="color: var(--purple3);">growth</span></h5>
+      <p>The largest network of marketing professionals in the games industry, from indie to AAA.</p>
+      <p style="font-size: 13px; color: var(--muted);">Want to get in touch? Reach us on <a href="mailto:contact@gamesgrowth.com" style="color: var(--purple3);">contact@gamesgrowth.com</a></p>
+    </div>
+    <div class="foot-col">
+      <h6>Guild</h6>
+      <a href="/#mission">Mission</a>
+      <a href="/#disciplines">Disciplines</a>
+      <a href="/#board">Board</a>
+      <a href="/#affiliates">Affiliates</a>
+      <a href="/#events">Events</a>
+      <a href="/#blog">Blog</a>
+    </div>
+    <div class="foot-col">
+      <h6>Members</h6>
+      <a href="https://join.gamesgrowth.com/signup/member">Apply</a>
+      <a href="https://join.gamesgrowth.com/login">Log In</a>
+    </div>
+    <div class="foot-col">
+      <h6>Affiliates</h6>
+      <a href="https://firstlook.gg">FirstLook.gg</a>
+      <a href="https://indiebi.com">IndieBI</a>
+      <a href="https://gamediscover.co">GameDiscoverCo</a>
+      <a href="https://publsh.com">PUBLSH</a>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span class="mono" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px;">&copy; 2026 GAMES GROWTH GUILD. ALL RIGHTS RESERVED.</span>
+    <a class="by-firstlook" href="https://firstlook.gg">
+      <svg class="fl-mark" viewBox="0 0 83 67" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#F5F5F7" d="M41.5,8.4 C47.9,0.8 58.3,-2 67.5,1.4 C76.8,4.9 83,13.8 83,23.7 L83,43.3 C83,53.2 76.8,62.1 67.5,65.6 C58.3,69 47.9,66.2 41.5,58.6 C35.1,66.2 24.7,69 15.5,65.6 C6.2,62.1 0,53.2 0,43.3 L0,23.7 C0,10.6 10.5,0 23.5,0 C30.5,0 37,3.1 41.5,8.4 Z M15.4,16.8 C10,16.8 5.7,21.1 5.7,26.5 L5.7,40.5 C5.7,45.9 10,50.2 15.4,50.2 C20.7,50.2 25.1,45.9 25.1,40.5 L25.1,26.5 C25.1,21.1 20.7,16.8 15.4,16.8 Z M51.2,16.8 C45.8,16.8 41.5,21.1 41.5,26.5 L41.5,40.5 C41.5,45.9 45.8,50.2 51.2,50.2 C56.5,50.2 60.9,45.9 60.9,40.5 L60.9,26.5 C60.9,21.1 56.5,16.8 51.2,16.8 Z"/>
+      </svg>
+      <span class="lbl">Powered by</span>
+      <span class="brand">FirstLook.gg</span>
+    </a>
+  </div>
+</footer>
+
+</body>
+</html>
