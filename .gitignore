@@ -11,3 +11,6 @@ node_modules
 
 # raw source photos — optimized versions live in assets/events/
 assets/Event Pictures/
+
+# raw advisor headshot uploads — optimized versions live in assets/advisors/
+assets/Advisor Images/

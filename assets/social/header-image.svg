@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#0A0B0E"/>
+  <g transform="translate(180, 75) scale(1.04)">
+    <rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/>
+    <g fill="#0A0B0E">
+      <rect x="60" y="60" width="24" height="24"/><rect x="84" y="60" width="24" height="24"/><rect x="108" y="60" width="24" height="24"/><rect x="132" y="60" width="24" height="24"/><rect x="156" y="60" width="24" height="24"/>
+      <rect x="60" y="84" width="24" height="24"/>
+      <rect x="60" y="108" width="24" height="24"/><rect x="108" y="108" width="24" height="24"/><rect x="132" y="108" width="24" height="24"/><rect x="156" y="108" width="24" height="24"/>
+      <rect x="60" y="132" width="24" height="24"/><rect x="156" y="132" width="24" height="24"/>
+      <rect x="60" y="156" width="24" height="24"/><rect x="84" y="156" width="24" height="24"/><rect x="108" y="156" width="24" height="24"/><rect x="132" y="156" width="24" height="24"/><rect x="156" y="156" width="24" height="24"/>
+    </g>
+  </g>
+  <text x="500" y="160" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="900" font-size="68" fill="#F5F5F7" letter-spacing="-2">GAMES</text>
+  <text x="500" y="232" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="900" font-size="68" fill="#F5F5F7" letter-spacing="-2">GROWTH</text>
+  <text x="500" y="304" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="900" font-size="68" fill="#C084FC" letter-spacing="-2">GUILD</text>
+</svg>
