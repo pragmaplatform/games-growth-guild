@@ -1,18 +1,21 @@
 <svg viewBox="0 0 1920 540" xmlns="http://www.w3.org/2000/svg">
   <rect width="1920" height="540" fill="#161A20"/>
   <g transform="translate(540, 120)" fill="#A855F7">
-    <rect x="60"  y="0"   width="60" height="60"/>
     <rect x="120" y="0"   width="60" height="60"/>
-    <rect x="180" y="0"   width="60" height="60"/>
-    <rect x="0"   y="60"  width="60" height="60"/>
     <rect x="60"  y="60"  width="60" height="60"/>
+    <rect x="120" y="60"  width="60" height="60"/>
+    <rect x="180" y="60"  width="60" height="60"/>
     <rect x="0"   y="120" width="60" height="60"/>
     <rect x="60"  y="120" width="60" height="60"/>
+    <rect x="120" y="120" width="60" height="60"/>
     <rect x="180" y="120" width="60" height="60"/>
     <rect x="240" y="120" width="60" height="60"/>
     <rect x="0"   y="180" width="60" height="60"/>
     <rect x="60"  y="180" width="60" height="60"/>
+    <rect x="120" y="180" width="60" height="60"/>
+    <rect x="180" y="180" width="60" height="60"/>
     <rect x="240" y="180" width="60" height="60"/>
+    <rect x="0"   y="240" width="60" height="60"/>
     <rect x="60"  y="240" width="60" height="60"/>
     <rect x="120" y="240" width="60" height="60"/>
     <rect x="180" y="240" width="60" height="60"/>
