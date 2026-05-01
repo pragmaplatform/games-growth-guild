@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GGG G — sizing iteration</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0B0E;
+    --bg2: #14171E;
+    --text: #F5F5F7;
+    --muted: #9097A1;
+    --dim: #5A626E;
+    --border: #232830;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 32px 96px;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .lede { color: var(--muted); font-size: 15px; max-width: 720px; margin-bottom: 56px; line-height: 1.55; }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  .cell {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 24px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .cell .marks { display: flex; align-items: flex-end; gap: 16px; min-height: 140px; }
+  .cell .name {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px; color: var(--text); letter-spacing: 1px;
+  }
+  .cell .desc {
+    font-size: 12px; color: var(--muted); text-align: center;
+    line-height: 1.4; min-height: 32px;
+  }
+
+  .nav-row {
+    margin-top: 64px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .nav-row .nav-strip {
+    display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+    background: rgba(10,11,14,0.78); border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .nav-strip .name { font-weight: 800; font-size: 16px; }
+  .nav-strip .name span { color: #C084FC; }
+  .nav-strip .lbl {
+    margin-left: auto; font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; color: var(--dim); letter-spacing: 1.5px;
+  }
+  .section-title {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: #C084FC; margin: 56px 0 20px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>G — sizing iteration</h1>
+<p class="lede">Same A1 shape and purple, four sizing levels. As the letter shrinks, more color shows around it (the proportions you'd see on a real P or C). Reply with the size — <strong>S1, S2, S3, or S4</strong> — and I'll lock it in everywhere.</p>
+
+<div class="grid">
+
+  <!-- S1: smallest, 42% fill (cell 20, padding 70) -->
+  <div class="cell">
+    <div class="marks">
+      <svg width="32" height="32" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="70" y="70" width="20" height="20"/><rect x="90" y="70" width="20" height="20"/><rect x="110" y="70" width="20" height="20"/><rect x="130" y="70" width="20" height="20"/><rect x="150" y="70" width="20" height="20"/><rect x="70" y="90" width="20" height="20"/><rect x="70" y="110" width="20" height="20"/><rect x="110" y="110" width="20" height="20"/><rect x="130" y="110" width="20" height="20"/><rect x="150" y="110" width="20" height="20"/><rect x="70" y="130" width="20" height="20"/><rect x="150" y="130" width="20" height="20"/><rect x="70" y="150" width="20" height="20"/><rect x="90" y="150" width="20" height="20"/><rect x="110" y="150" width="20" height="20"/><rect x="130" y="150" width="20" height="20"/><rect x="150" y="150" width="20" height="20"/></g></svg>
+      <svg width="64" height="64" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="70" y="70" width="20" height="20"/><rect x="90" y="70" width="20" height="20"/><rect x="110" y="70" width="20" height="20"/><rect x="130" y="70" width="20" height="20"/><rect x="150" y="70" width="20" height="20"/><rect x="70" y="90" width="20" height="20"/><rect x="70" y="110" width="20" height="20"/><rect x="110" y="110" width="20" height="20"/><rect x="130" y="110" width="20" height="20"/><rect x="150" y="110" width="20" height="20"/><rect x="70" y="130" width="20" height="20"/><rect x="150" y="130" width="20" height="20"/><rect x="70" y="150" width="20" height="20"/><rect x="90" y="150" width="20" height="20"/><rect x="110" y="150" width="20" height="20"/><rect x="130" y="150" width="20" height="20"/><rect x="150" y="150" width="20" height="20"/></g></svg>
+      <svg width="120" height="120" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="70" y="70" width="20" height="20"/><rect x="90" y="70" width="20" height="20"/><rect x="110" y="70" width="20" height="20"/><rect x="130" y="70" width="20" height="20"/><rect x="150" y="70" width="20" height="20"/><rect x="70" y="90" width="20" height="20"/><rect x="70" y="110" width="20" height="20"/><rect x="110" y="110" width="20" height="20"/><rect x="130" y="110" width="20" height="20"/><rect x="150" y="110" width="20" height="20"/><rect x="70" y="130" width="20" height="20"/><rect x="150" y="130" width="20" height="20"/><rect x="70" y="150" width="20" height="20"/><rect x="90" y="150" width="20" height="20"/><rect x="110" y="150" width="20" height="20"/><rect x="130" y="150" width="20" height="20"/><rect x="150" y="150" width="20" height="20"/></g></svg>
+    </div>
+    <div class="name">S1</div>
+    <div class="desc">smallest — 42% of square, lots of color around the letter</div>
+  </div>
+
+  <!-- S2: small, 50% fill (cell 24, padding 60) -->
+  <div class="cell">
+    <div class="marks">
+      <svg width="32" height="32" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="60" y="60" width="24" height="24"/><rect x="84" y="60" width="24" height="24"/><rect x="108" y="60" width="24" height="24"/><rect x="132" y="60" width="24" height="24"/><rect x="156" y="60" width="24" height="24"/><rect x="60" y="84" width="24" height="24"/><rect x="60" y="108" width="24" height="24"/><rect x="108" y="108" width="24" height="24"/><rect x="132" y="108" width="24" height="24"/><rect x="156" y="108" width="24" height="24"/><rect x="60" y="132" width="24" height="24"/><rect x="156" y="132" width="24" height="24"/><rect x="60" y="156" width="24" height="24"/><rect x="84" y="156" width="24" height="24"/><rect x="108" y="156" width="24" height="24"/><rect x="132" y="156" width="24" height="24"/><rect x="156" y="156" width="24" height="24"/></g></svg>
+      <svg width="64" height="64" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="60" y="60" width="24" height="24"/><rect x="84" y="60" width="24" height="24"/><rect x="108" y="60" width="24" height="24"/><rect x="132" y="60" width="24" height="24"/><rect x="156" y="60" width="24" height="24"/><rect x="60" y="84" width="24" height="24"/><rect x="60" y="108" width="24" height="24"/><rect x="108" y="108" width="24" height="24"/><rect x="132" y="108" width="24" height="24"/><rect x="156" y="108" width="24" height="24"/><rect x="60" y="132" width="24" height="24"/><rect x="156" y="132" width="24" height="24"/><rect x="60" y="156" width="24" height="24"/><rect x="84" y="156" width="24" height="24"/><rect x="108" y="156" width="24" height="24"/><rect x="132" y="156" width="24" height="24"/><rect x="156" y="156" width="24" height="24"/></g></svg>
+      <svg width="120" height="120" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="60" y="60" width="24" height="24"/><rect x="84" y="60" width="24" height="24"/><rect x="108" y="60" width="24" height="24"/><rect x="132" y="60" width="24" height="24"/><rect x="156" y="60" width="24" height="24"/><rect x="60" y="84" width="24" height="24"/><rect x="60" y="108" width="24" height="24"/><rect x="108" y="108" width="24" height="24"/><rect x="132" y="108" width="24" height="24"/><rect x="156" y="108" width="24" height="24"/><rect x="60" y="132" width="24" height="24"/><rect x="156" y="132" width="24" height="24"/><rect x="60" y="156" width="24" height="24"/><rect x="84" y="156" width="24" height="24"/><rect x="108" y="156" width="24" height="24"/><rect x="132" y="156" width="24" height="24"/><rect x="156" y="156" width="24" height="24"/></g></svg>
+    </div>
+    <div class="name">S2</div>
+    <div class="desc">small — 50% of square, balanced color halo</div>
+  </div>
+
+  <!-- S3: medium, 58% fill (cell 28, padding 50) -->
+  <div class="cell">
+    <div class="marks">
+      <svg width="32" height="32" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="50" y="50" width="28" height="28"/><rect x="78" y="50" width="28" height="28"/><rect x="106" y="50" width="28" height="28"/><rect x="134" y="50" width="28" height="28"/><rect x="162" y="50" width="28" height="28"/><rect x="50" y="78" width="28" height="28"/><rect x="50" y="106" width="28" height="28"/><rect x="106" y="106" width="28" height="28"/><rect x="134" y="106" width="28" height="28"/><rect x="162" y="106" width="28" height="28"/><rect x="50" y="134" width="28" height="28"/><rect x="162" y="134" width="28" height="28"/><rect x="50" y="162" width="28" height="28"/><rect x="78" y="162" width="28" height="28"/><rect x="106" y="162" width="28" height="28"/><rect x="134" y="162" width="28" height="28"/><rect x="162" y="162" width="28" height="28"/></g></svg>
+      <svg width="64" height="64" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="50" y="50" width="28" height="28"/><rect x="78" y="50" width="28" height="28"/><rect x="106" y="50" width="28" height="28"/><rect x="134" y="50" width="28" height="28"/><rect x="162" y="50" width="28" height="28"/><rect x="50" y="78" width="28" height="28"/><rect x="50" y="106" width="28" height="28"/><rect x="106" y="106" width="28" height="28"/><rect x="134" y="106" width="28" height="28"/><rect x="162" y="106" width="28" height="28"/><rect x="50" y="134" width="28" height="28"/><rect x="162" y="134" width="28" height="28"/><rect x="50" y="162" width="28" height="28"/><rect x="78" y="162" width="28" height="28"/><rect x="106" y="162" width="28" height="28"/><rect x="134" y="162" width="28" height="28"/><rect x="162" y="162" width="28" height="28"/></g></svg>
+      <svg width="120" height="120" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="50" y="50" width="28" height="28"/><rect x="78" y="50" width="28" height="28"/><rect x="106" y="50" width="28" height="28"/><rect x="134" y="50" width="28" height="28"/><rect x="162" y="50" width="28" height="28"/><rect x="50" y="78" width="28" height="28"/><rect x="50" y="106" width="28" height="28"/><rect x="106" y="106" width="28" height="28"/><rect x="134" y="106" width="28" height="28"/><rect x="162" y="106" width="28" height="28"/><rect x="50" y="134" width="28" height="28"/><rect x="162" y="134" width="28" height="28"/><rect x="50" y="162" width="28" height="28"/><rect x="78" y="162" width="28" height="28"/><rect x="106" y="162" width="28" height="28"/><rect x="134" y="162" width="28" height="28"/><rect x="162" y="162" width="28" height="28"/></g></svg>
+    </div>
+    <div class="name">S3</div>
+    <div class="desc">medium — 58% of square</div>
+  </div>
+
+  <!-- S4: original F — 67% fill (cell 32, padding 40) -->
+  <div class="cell">
+    <div class="marks">
+      <svg width="32" height="32" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="40" y="40" width="32" height="32"/><rect x="72" y="40" width="32" height="32"/><rect x="104" y="40" width="32" height="32"/><rect x="136" y="40" width="32" height="32"/><rect x="168" y="40" width="32" height="32"/><rect x="40" y="72" width="32" height="32"/><rect x="40" y="104" width="32" height="32"/><rect x="104" y="104" width="32" height="32"/><rect x="136" y="104" width="32" height="32"/><rect x="168" y="104" width="32" height="32"/><rect x="40" y="136" width="32" height="32"/><rect x="168" y="136" width="32" height="32"/><rect x="40" y="168" width="32" height="32"/><rect x="72" y="168" width="32" height="32"/><rect x="104" y="168" width="32" height="32"/><rect x="136" y="168" width="32" height="32"/><rect x="168" y="168" width="32" height="32"/></g></svg>
+      <svg width="64" height="64" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="40" y="40" width="32" height="32"/><rect x="72" y="40" width="32" height="32"/><rect x="104" y="40" width="32" height="32"/><rect x="136" y="40" width="32" height="32"/><rect x="168" y="40" width="32" height="32"/><rect x="40" y="72" width="32" height="32"/><rect x="40" y="104" width="32" height="32"/><rect x="104" y="104" width="32" height="32"/><rect x="136" y="104" width="32" height="32"/><rect x="168" y="104" width="32" height="32"/><rect x="40" y="136" width="32" height="32"/><rect x="168" y="136" width="32" height="32"/><rect x="40" y="168" width="32" height="32"/><rect x="72" y="168" width="32" height="32"/><rect x="104" y="168" width="32" height="32"/><rect x="136" y="168" width="32" height="32"/><rect x="168" y="168" width="32" height="32"/></g></svg>
+      <svg width="120" height="120" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="40" y="40" width="32" height="32"/><rect x="72" y="40" width="32" height="32"/><rect x="104" y="40" width="32" height="32"/><rect x="136" y="40" width="32" height="32"/><rect x="168" y="40" width="32" height="32"/><rect x="40" y="72" width="32" height="32"/><rect x="40" y="104" width="32" height="32"/><rect x="104" y="104" width="32" height="32"/><rect x="136" y="104" width="32" height="32"/><rect x="168" y="104" width="32" height="32"/><rect x="40" y="136" width="32" height="32"/><rect x="168" y="136" width="32" height="32"/><rect x="40" y="168" width="32" height="32"/><rect x="72" y="168" width="32" height="32"/><rect x="104" y="168" width="32" height="32"/><rect x="136" y="168" width="32" height="32"/><rect x="168" y="168" width="32" height="32"/></g></svg>
+    </div>
+    <div class="name">S4</div>
+    <div class="desc">original F — 67% of square (your earlier pick)</div>
+  </div>
+
+</div>
+
+<div class="section-title">In the nav (32px each)</div>
+
+<div class="nav-row">
+  <div class="nav-strip">
+    <svg width="32" height="32" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="70" y="70" width="20" height="20"/><rect x="90" y="70" width="20" height="20"/><rect x="110" y="70" width="20" height="20"/><rect x="130" y="70" width="20" height="20"/><rect x="150" y="70" width="20" height="20"/><rect x="70" y="90" width="20" height="20"/><rect x="70" y="110" width="20" height="20"/><rect x="110" y="110" width="20" height="20"/><rect x="130" y="110" width="20" height="20"/><rect x="150" y="110" width="20" height="20"/><rect x="70" y="130" width="20" height="20"/><rect x="150" y="130" width="20" height="20"/><rect x="70" y="150" width="20" height="20"/><rect x="90" y="150" width="20" height="20"/><rect x="110" y="150" width="20" height="20"/><rect x="130" y="150" width="20" height="20"/><rect x="150" y="150" width="20" height="20"/></g></svg>
+    <span class="name">games<span>growth</span></span>
+    <span class="lbl">S1</span>
+  </div>
+  <div class="nav-strip">
+    <svg width="32" height="32" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="60" y="60" width="24" height="24"/><rect x="84" y="60" width="24" height="24"/><rect x="108" y="60" width="24" height="24"/><rect x="132" y="60" width="24" height="24"/><rect x="156" y="60" width="24" height="24"/><rect x="60" y="84" width="24" height="24"/><rect x="60" y="108" width="24" height="24"/><rect x="108" y="108" width="24" height="24"/><rect x="132" y="108" width="24" height="24"/><rect x="156" y="108" width="24" height="24"/><rect x="60" y="132" width="24" height="24"/><rect x="156" y="132" width="24" height="24"/><rect x="60" y="156" width="24" height="24"/><rect x="84" y="156" width="24" height="24"/><rect x="108" y="156" width="24" height="24"/><rect x="132" y="156" width="24" height="24"/><rect x="156" y="156" width="24" height="24"/></g></svg>
+    <span class="name">games<span>growth</span></span>
+    <span class="lbl">S2</span>
+  </div>
+  <div class="nav-strip">
+    <svg width="32" height="32" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="50" y="50" width="28" height="28"/><rect x="78" y="50" width="28" height="28"/><rect x="106" y="50" width="28" height="28"/><rect x="134" y="50" width="28" height="28"/><rect x="162" y="50" width="28" height="28"/><rect x="50" y="78" width="28" height="28"/><rect x="50" y="106" width="28" height="28"/><rect x="106" y="106" width="28" height="28"/><rect x="134" y="106" width="28" height="28"/><rect x="162" y="106" width="28" height="28"/><rect x="50" y="134" width="28" height="28"/><rect x="162" y="134" width="28" height="28"/><rect x="50" y="162" width="28" height="28"/><rect x="78" y="162" width="28" height="28"/><rect x="106" y="162" width="28" height="28"/><rect x="134" y="162" width="28" height="28"/><rect x="162" y="162" width="28" height="28"/></g></svg>
+    <span class="name">games<span>growth</span></span>
+    <span class="lbl">S3</span>
+  </div>
+  <div class="nav-strip">
+    <svg width="32" height="32" viewBox="0 0 240 240"><rect width="240" height="240" rx="36" ry="36" fill="#A855F7"/><g fill="#0A0B0E"><rect x="40" y="40" width="32" height="32"/><rect x="72" y="40" width="32" height="32"/><rect x="104" y="40" width="32" height="32"/><rect x="136" y="40" width="32" height="32"/><rect x="168" y="40" width="32" height="32"/><rect x="40" y="72" width="32" height="32"/><rect x="40" y="104" width="32" height="32"/><rect x="104" y="104" width="32" height="32"/><rect x="136" y="104" width="32" height="32"/><rect x="168" y="104" width="32" height="32"/><rect x="40" y="136" width="32" height="32"/><rect x="168" y="136" width="32" height="32"/><rect x="40" y="168" width="32" height="32"/><rect x="72" y="168" width="32" height="32"/><rect x="104" y="168" width="32" height="32"/><rect x="136" y="168" width="32" height="32"/><rect x="168" y="168" width="32" height="32"/></g></svg>
+    <span class="name">games<span>growth</span></span>
+    <span class="lbl">S4</span>
+  </div>
+</div>
+
+<p style="color: var(--muted); font-size: 13px; margin-top: 56px; line-height: 1.6;">
+  Reply with <code style="background:var(--bg2);padding:2px 8px;border-radius:4px;color:#C084FC">S1</code>, <code style="background:var(--bg2);padding:2px 8px;border-radius:4px;color:#C084FC">S2</code>, <code style="background:var(--bg2);padding:2px 8px;border-radius:4px;color:#C084FC">S3</code>, or <code style="background:var(--bg2);padding:2px 8px;border-radius:4px;color:#C084FC">S4</code> and I'll commit it across nav, favicon, hero title mark, <code>logo-mark.svg</code>, and the pixel-grid <code>logo-lockup.svg</code>.
+</p>
+
+</div>
+</body>
+</html>
