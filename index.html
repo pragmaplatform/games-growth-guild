@@ -369,11 +369,12 @@
   }
   .event-card h3 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
   .event-card .event-sub { font-size: 14px; color: var(--muted); line-height: 1.5; }
-  .event-card .event-sub a {
+  .event-card .event-desc { font-size: 14px; color: var(--muted); line-height: 1.55; margin: 0; }
+  .event-card .event-sub a, .event-card .event-desc a {
     color: var(--purple3); border-bottom: 1px solid rgba(192,132,252,0.3);
     transition: color .2s ease, border-color .2s ease;
   }
-  .event-card .event-sub a:hover { color: var(--text); border-bottom-color: var(--purple); }
+  .event-card .event-sub a:hover, .event-card .event-desc a:hover { color: var(--text); border-bottom-color: var(--purple); }
   .event-card .event-tag {
     display: inline-block; padding: 6px 12px;
     background: rgba(168,85,247,0.12); color: var(--purple3);
@@ -832,15 +833,16 @@
   <div class="events-grid">
     <div class="event-card">
       <div class="event-logo"><img src="assets/events/the-story-mob.svg" alt="The Story Mob"></div>
-      <div class="event-meta">May 13 &middot; 5:00 PM UK &middot; GGG Discord</div>
+      <div class="event-meta">May 13 &middot; 17:00 UK &middot; 12:00 EST &middot; 09:00 PST</div>
       <h3>GGG x The Story Mob</h3>
-      <div class="event-sub">Join <a href="https://www.thestorymob.com/" target="_blank" rel="noopener">The Story Mob</a> for an exclusive digital workshop on PR in Games, and where it fits in the marketing funnel.</div>
+      <div class="event-sub">GGG Discord</div>
+      <p class="event-desc">Join <a href="https://www.thestorymob.com/" target="_blank" rel="noopener">The Story Mob</a> for an exclusive digital workshop on PR in Games, and where it fits in the marketing funnel.</p>
       <span class="event-tag">Virtual</span>
     </div>
 
     <a class="event-card" href="https://luma.com/gggatgdc" target="_blank" rel="noopener">
       <div class="event-logo"><img src="assets/events/gdc.svg" alt="GDC"></div>
-      <div class="event-meta">Mar 10 &middot; 2:00 to 3:30 PM</div>
+      <div class="event-meta">Mar 10 &middot; 21:00 UK &middot; 17:00 EST &middot; 14:00 PST</div>
       <h3>Coffee &amp; Conversations at GDC</h3>
       <div class="event-sub">Twitch Office, San Francisco</div>
       <span class="event-tag">In Person</span>
